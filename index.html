@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore beautiful destinations with NatureTrip.">
+  <title>NatureTrip | Explore the Beauty of Nature</title>
+  <style>
+    :root {
+      --green: #16a765;
+      --green-dark: #087b49;
+      --ink: #1c293b;
+      --muted: #657286;
+      --soft: #f4f7f6;
+      --footer: #182737;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      line-height: 1.55;
+      background: #fff;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(960px, calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 7px; font-size: 19px; font-weight: 800; white-space: nowrap; }
+    .brand-mark { color: var(--green); font-size: 27px; line-height: 1; }
+    .brand-name span { color: var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 27px; font-size: 12px; }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+    .nav-links a.active { border-bottom: 2px solid var(--green); padding-bottom: 4px; }
+    .nav-cta, .button {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      border-radius: 22px;
+      padding: 10px 19px;
+      font-weight: 700;
+      font-size: 12px;
+      border: 0;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .nav-cta { padding: 8px 16px; white-space: nowrap; }
+    .nav-cta:hover, .button:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .menu-toggle { display: none; background: white; border: 1px solid #dce5df; padding: 7px 10px; border-radius: 8px; }
+    .hero {
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      background:
+        linear-gradient(rgba(3, 23, 38, .45), rgba(3, 23, 38, .55)),
+        url("images/hero.jpg") center 52% / cover no-repeat;
+    }
+    .hero-content { max-width: 620px; padding: 52px 20px; }
+    .hero h1 { font-size: clamp(2.2rem, 4vw, 2.9rem); line-height: 1.1; margin: 0 0 13px; font-weight: 800; }
+    .hero p { font-size: 15px; line-height: 1.55; margin: 0 auto 19px; max-width: 520px; }
+    .features { background: var(--soft); padding: 20px 0 19px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; text-align: center; }
+    .feature-icon {
+      width: 50px; height: 50px; margin: 0 auto 7px;
+      display: grid; place-items: center; border-radius: 50%;
+      background: #d8f3e6; color: var(--green-dark); font-size: 23px; font-weight: 700;
+    }
+    .feature h3 { margin: 0 0 4px; font-size: 14px; }
+    .feature p { margin: 0 auto; max-width: 205px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .destinations { padding: 18px 0 25px; }
+    .section-heading { text-align: center; margin-bottom: 17px; }
+    .section-heading h2 { margin: 0; font-size: 25px; letter-spacing: -.5px; line-height: 1.3; }
+    .section-heading p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+    .destination-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .destination-card img { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 6px; }
+    .destination-card h3 { margin: 9px 0 2px; font-size: 15px; }
+    .destination-card p { margin: 0 0 4px; font-size: 13px; color: var(--muted); }
+    .learn-more { color: var(--green); font-size: 12px; font-weight: 500; }
+    .learn-more:hover { color: var(--green-dark); text-decoration: underline; }
+    footer { background: var(--footer); color: #f5f7fa; padding: 20px 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 36px; align-items: start; }
+    .footer-brand { font-size: 21px; font-weight: 800; margin-bottom: 8px; }
+    .footer-brand span { color: var(--green); }
+    footer p { color: #d0d8e1; font-size: 12px; line-height: 1.6; margin: 0; }
+    footer h3 { font-size: 13px; margin: 0 0 9px; }
+    .footer-links { display: grid; grid-template-columns: repeat(3, max-content); gap: 5px 22px; font-size: 12px; color: #d0d8e1; }
+    .footer-links a:hover { color: #fff; }
+    .socials { display: flex; gap: 10px; margin: 8px 0 12px; }
+    .socials a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #3c4a59; font-weight: 700; font-size: 13px; }
+    .socials a:hover { background: var(--green); }
+    @media (max-width: 700px) {
+      .site-header { height: 60px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 60px; left: 0; right: 0;
+        padding: 18px 22px; background: white; flex-direction: column; align-items: flex-start;
+        gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-cta { display: none; }
+      .hero { min-height: 350px; }
+      .feature-grid { gap: 18px; }
+      .destination-grid { grid-template-columns: 1fr; gap: 22px; }
+      .destination-card img { height: 220px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 22px; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 28px, 960px); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 14px; }
+      .footer-links { grid-template-columns: repeat(2, max-content); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="NatureTrip home">
+        <span class="brand-mark" aria-hidden="true">▲</span>
+        <span class="brand-name"><span>Nature</span>Trip</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false">Menu</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a class="active" href="#home">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#destinations">Explore Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Explore the Beauty<br>of Nature</h1>
+        <p>Discover breathtaking destinations, create unforgettable memories, and experience the world like never before.</p>
+        <a class="button" href="#destinations">Start Your Journey &rarr;</a>
+      </div>
+    </section>
+
+    <section class="features" id="about">
+      <div class="container feature-grid">
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">▲</div>
+          <h3>Amazing Destinations</h3>
+          <p>Explore the most beautiful places around the world.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">◎</div>
+          <h3>Easy Planning</h3>
+          <p>Plan your trip with our simple guides and resources.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">♟</div>
+          <h3>Memorable Experiences</h3>
+          <p>Create memories that last a lifetime.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="destinations" id="destinations">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Popular Destinations</h2>
+          <p>Discover some of the most loved destinations by our travelers.</p>
+        </div>
+        <div class="destination-grid" id="gallery">
+          <article class="destination-card">
+            <img src="images/maldives.jpg" alt="Tropical Maldives beach with turquoise water">
+            <h3>Maldives</h3>
+            <p>Crystal clear waters and white sandy beaches.</p>
+            <a class="learn-more" href="#contact">Learn More &rarr;</a>
+          </article>
+          <article class="destination-card">
+            <img src="images/switzerland.jpg" alt="Swiss mountain range reflected in an alpine lake">
+            <h3>Switzerland</h3>
+            <p>Majestic mountains and serene lakes.</p>
+            <a class="learn-more" href="#contact">Learn More &rarr;</a>
+          </article>
+          <article class="destination-card">
+            <img src="images/bali.jpg" alt="Bali temple beside a lake at sunset">
+            <h3>Bali</h3>
+            <p>A perfect blend of culture and natural beauty.</p>
+            <a class="learn-more" href="#contact">Learn More &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="display:none" aria-hidden="true"></section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand"><span>▲</span> <span>Nature</span>Trip</div>
+        <p>Exploring the world, one destination at a time.<br>Join us and discover the beauty of our planet.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#home">Home</a>
+          <a href="#destinations">Destinations</a>
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <div class="socials" aria-label="Social links">
+          <a href="#contact" aria-label="Facebook">f</a>
+          <a href="#contact" aria-label="Instagram">◎</a>
+          <a href="#contact" aria-label="Twitter">t</a>
+          <a href="#contact" aria-label="YouTube">▶</a>
+        </div>
+        <p>&copy; 2026 NatureTrip. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
